@@ -14,7 +14,7 @@ USE toiletview;
 -- topic v3/espm/devices/presence08/up
 -- { "end_device_ids": { "device_id": "presence01" }, "uplink_message": { "rx_metadata": [{ "timestamp": 2040934975 }], "decoded_payload": { "battery": 99, "occupancy": "vacant" } } }
 CREATE TABLE presenca (
-  id bigint NOT NULL AUTO_INCREMENT,
+  id bigint NOT NULL,
   data datetime NOT NULL,
   id_sensor tinyint NOT NULL,
   delta int NOT NULL,
