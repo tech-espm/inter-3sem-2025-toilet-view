@@ -12,6 +12,8 @@ from sqlalchemy import create_engine, text
 from sqlalchemy.orm import Session
 from config import conexao_banco
 
+print(__name__)
+
 # Como criar uma comunicação com o banco de dados:
 # https://docs.sqlalchemy.org/en/14/core/engines.html
 #
