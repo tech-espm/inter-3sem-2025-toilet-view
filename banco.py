@@ -82,3 +82,45 @@ def criarPessoa(nome, email):
 
 # Para mais informações:
 # https://docs.sqlalchemy.org/en/14/tutorial/dbapi_transactions.html
+
+def obterIdMaximo(tabela):
+	with Session(engine) as sessao:
+		registro = sessao.execute(text(f"SELECT MAX(id) id FROM {tabela}")).first()
+
+		if registro == None or registro.id == None:
+			return 0
+		else:
+			return registro.id
+
+def inserirPresencas(registros):
+	with Session(engine) as sessao, sessao.begin():
+		for registro in registros:
+			sessao.execute(text("INSERT INTO presenca (id, data, id_sensor, delta, bateria, ocupado) VALUES (:id, :data, :id_sensor, :delta, :bateria, :ocupado)"), registro)
+
+def monitorarPresencasTempoReal():
+	with Session(engine) as sessao:
+		registros = sessao.execute(text("""
+(select id_sensor, ocupado, time_to_sec(timediff(now(), data)) delta_agora from presenca where id_sensor = 1 order by id desc limit 1)
+union all
+(select id_sensor, ocupado, time_to_sec(timediff(now(), data)) delta_agora from presenca where id_sensor = 2 order by id desc limit 1)
+union all
+(select id_sensor, ocupado, time_to_sec(timediff(now(), data)) delta_agora from presenca where id_sensor = 3 order by id desc limit 1)
+union all
+(select id_sensor, ocupado, time_to_sec(timediff(now(), data)) delta_agora from presenca where id_sensor = 4 order by id desc limit 1)
+union all
+(select id_sensor, ocupado, time_to_sec(timediff(now(), data)) delta_agora from presenca where id_sensor = 5 order by id desc limit 1)
+union all
+(select id_sensor, ocupado, time_to_sec(timediff(now(), data)) delta_agora from presenca where id_sensor = 6 order by id desc limit 1)
+union all
+(select id_sensor, ocupado, time_to_sec(timediff(now(), data)) delta_agora from presenca where id_sensor = 7 order by id desc limit 1)
+union all
+(select id_sensor, ocupado, time_to_sec(timediff(now(), data)) delta_agora from presenca where id_sensor = 8 order by id desc limit 1)
+;"""))
+		presencas = []
+		for registro in registros:
+			presencas.append({
+				"id_sensor": registro.id_sensor,
+				"ocupado": registro.ocupado,
+				"delta_agora": registro.delta_agora,
+			})
+		return presencas
