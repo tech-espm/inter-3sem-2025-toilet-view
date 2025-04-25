@@ -2,16 +2,95 @@
 
 {% block body %}
 
-<div class="container-fluid">
+<style>
+	.padding{
+		padding: 25px;
+	}
 
-	<h1>
-		Sobre
-	</h1>
 
-	<p>
-		Sobre nós! 😊
-	</p>
+	.container {
+		display: flex;
+		gap: 20px;
+	}
 
+	.ttl-sobrenos {
+		color: #8a2be2;
+		font-size: 36px;
+		margin-bottom: 20px;
+	}
+
+	.texto-sobre-nos {
+		flex: 2;
+		border: 2px solid #8a2be2;
+		border-radius: 10px;
+		padding: 20px;
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	}
+
+	.texto-sobre-nos p {
+		font-size: 16px;
+		line-height: 1.6;
+		color: #333;
+		margin: 0;
+		margin-bottom: 10px;
+	}
+
+	.image-box {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 20px;
+		max-height: 200px;
+		border-radius: 8px
+	}
+
+	.foto-nossa-box {
+		border: 2px solid #8a2be2;
+		border-radius: 10px;
+		width: 100%;
+		max-height: 240px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: #333;
+		font-size: 18px;
+		text-align: center;
+	}
+
+	.espm-logo {
+		width: 150px;
+		max-width: 350px;
+		margin: 50px auto;
+	}
+</style>
+
+<div class="container padding">
+	<div class="texto-sobre-nos">
+
+		<h1 class="titulo">
+			Sobre nós
+		</h1>
+
+		<p>
+			Somos um grupo de seis alunos da ESPM, movidos pelo desejo de utilizar a tecnologia para aprimorar a experiência e a gestão de espaços compartilhados. Nosso projeto surgiu da necessidade de otimizar o uso de banheiros públicos e coletivos, garantindo maior conforto, praticidade e higiene para os usuários por meio de sensores inteligentes.
+			Com o avanço da automação e da Internet das Coisas (IoT), acreditamos que implementar soluções de monitoramento pode contribuir significativamente para a eficiência na manutenção e no uso responsável de recursos.
+			Nossa missão é facilitar a gestão de banheiros coletivos, proporcionando aos usuários informações em tempo real sobre a disponibilidade das cabines e a qualidade do ambiente. Dessa forma, promovemos não apenas conveniência, mas também um espaço mais organizado e higiênico para todos.
+		</p>
+		
+	</div>
+
+	<div>
+		<div class="foto-nossa-box">
+			<img src="/static/img/nossafoto.jpg"  class="image-box">
+		</div>
+
+		<div class="espm-logo">
+			<img src="/static/img/espm-logo.jpg">
+		</div>
+		
+	</div>
 </div>
+
 
 {% endblock %}
