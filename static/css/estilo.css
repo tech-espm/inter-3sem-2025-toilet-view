@@ -8,7 +8,7 @@ html, body {
 }
 
 .limitador {
-	max-width: 1200px;
+	max-width: 1400px;
 	margin: 0px auto;
 
 	/* Para fazer o rodapé ficar sempre na parte inferior da página ;) */
@@ -32,4 +32,49 @@ html, body {
 .link-rodape, .link-rodape:hover {
 	color: white;
 	text-decoration: none;
+}
+
+.banner-inicial {
+	background-image: url("../img/fundo-banheiro.png");
+	background-size: cover;
+	width: 100%;
+	height: 25vh;
+	color: white;
+	text-align: center;
+	align-items: center;
+	justify-content: center;
+	display: flex;
+}
+
+.txt-banner-inicial {
+	color:white;
+}
+
+.secao1{
+	background-color: beige;
+    background-position: left;
+    padding: 300px 0px;
+}
+
+.txt-sc1{	
+	max-width: 350px;
+	color: black;
+}
+
+.secao2{
+	background-color: green;
+    background-position: left;
+    padding: 300px 0px;
+}
+
+.secao3{
+	background-color: grey;
+    background-position: left;
+    padding: 300px 0px;
+}
+
+.secao4{
+	background-color: brown;
+    background-position: left;
+    padding: 300px 0px;
 }
