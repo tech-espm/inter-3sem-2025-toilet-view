@@ -8,9 +8,18 @@
 		Projeto
 	</h1>
 
-	<div class="card shadow my-4">
-		<div class="card-body" id="div-grafico"></div>
-	</div>
+    <div class="card shadow my-4">
+        <div class="card-body">
+			<h1>Ocupação Atual</h1>
+			<div id="div-grafico"></div>
+		</div>
+    </div>
+    <div class="card shadow my-4">
+        <div class="card-body">
+			<h1>Estado de Hoje por Hora</h1>
+			<div id="div-heatmap"></div>
+		</div>
+    </div>
 
 </div>
 
@@ -33,101 +42,220 @@
 		}
 	});
 
-	async function atualizarDados() {
-		waitSwal();
+    function relativeLuminance(rgb) {
+        if ((typeof rgb) === "string")
+            rgb = parseInt(rgb.replace("#", ""), 16);
+        rgb |= 0;
+        if (rgb < 0)
+            return 1;
+        var RsRGB = ((rgb >>> 16) & 0xff) / 255.0,
+            GsRGB = ((rgb >>> 8) & 0xff) / 255.0,
+            BsRGB = (rgb & 0xff) / 255.0,
+            R, G, B;
+        if (RsRGB <= 0.03928) R = RsRGB / 12.92; else R = Math.pow((RsRGB + 0.055) / 1.055, 2.4);
+        if (GsRGB <= 0.03928) G = GsRGB / 12.92; else G = Math.pow((GsRGB + 0.055) / 1.055, 2.4);
+        if (BsRGB <= 0.03928) B = BsRGB / 12.92; else B = Math.pow((BsRGB + 0.055) / 1.055, 2.4);
+        return (0.2126 * R) + (0.7152 * G) + (0.0722 * B);
+    }
 
+    function textColorForBackground(i) {
+        return (relativeLuminance(i) < 0.4) ? "#ffffff" : "#000000";
+    }
+
+    function coresHeatmap(perc) {
+        const r0 = 0xff;
+        const g0 = 0xff;
+        const b0 = 0xff;
+        const r1 = 0xff;
+        const g1 = 0xcc;
+        const b1 = 0x00;
+        let r = Math.max(0, Math.min(255, ((perc * r1) + ((1 - perc) * r0)) | 0)).toString(16);
+        let g = Math.max(0, Math.min(255, ((perc * g1) + ((1 - perc) * g0)) | 0)).toString(16);
+        let b = Math.max(0, Math.min(255, ((perc * b1) + ((1 - perc) * b0)) | 0)).toString(16);
+        if (r.length < 2) r = "0" + r;
+        if (g.length < 2) g = "0" + g;
+        if (b.length < 2) b = "0" + b;
+        const corFundo = "#" + r + g + b;
+        const corTexto = textColorForBackground(corFundo);
+        return `background-color: ${corFundo}; color: ${corTexto};`;
+    }
+
+	function gerarGrafico(dados) {
+		let div = document.getElementById("div-grafico");
+		div.innerHTML = '<canvas id="grafico-barras" style="height: 50vh;"></canvas>';
+
+		let labels = [], data = [];
+
+		for (let i = 0; i < dados.length; i++) {
+			labels.push("Sensor " + dados[i].id_sensor);
+			data.push(dados[i].ocupacao);
+		}
+
+		let grafico = new Chart(document.getElementById("grafico-barras"), {
+			type: "bar",
+			data: {
+				labels: labels,
+				datasets: [{
+					label: "Ocupação",
+					backgroundColor: "#4e73df",
+					hoverBackgroundColor: "#2e59d9",
+					borderColor: "#4e73df",
+					data: data,
+				}],
+			},
+			options: {
+				maintainAspectRatio: false,
+				layout: {
+					padding: {
+						left: 10,
+						right: 25,
+						top: 25,
+						bottom: 0
+					}
+				},
+				scales: {
+					x: {
+						gridLines: {
+							display: false,
+							drawBorder: false
+						},
+						ticks: {
+							maxTicksLimit: 10
+						},
+						maxBarThickness: 25,
+					},
+					y: {
+						//display: false,
+						ticks: {
+							min: 0,
+							max: 10,
+							maxTicksLimit: 10,
+							padding: 10
+						},
+						gridLines: {
+							color: "rgb(234, 236, 244)",
+							zeroLineColor: "rgb(234, 236, 244)",
+							drawBorder: false,
+							borderDash: [2],
+							zeroLineBorderDash: [2]
+						}
+					},
+				},
+				legend: {
+					display: false
+				},
+				tooltips: {
+					titleMarginBottom: 10,
+					titleFontColor: '#6e707e',
+					titleFontSize: 14,
+					backgroundColor: "rgb(255,255,255)",
+					bodyFontColor: "#858796",
+					borderColor: '#dddfeb',
+					borderWidth: 1,
+					xPadding: 15,
+					yPadding: 15,
+					displayColors: false,
+					caretPadding: 10
+				},
+			}
+		});
+	}
+
+	function gerarHeatmapOdor(dados) {
+		const colunas = ["Hora", "H2S", "Umidade", "NH3", "Temperatura"];
+
+		let html = [`<table class="table table-bordered table-sm w-50 mx-auto" style="height: auto; line-height: 1.2;"><thead><tr>`];
+		for (let i = 0; i < colunas.length; i++) {
+			html.push(`<th>${colunas[i]}</th>`);
+		}
+
+		html.push(`
+			</tr>
+			</thead>
+			<tbody>
+		`);
+
+		let menorH2S = dados[0].h2s;
+		let menorUmidade = dados[0].umidade;
+		let menorNH3 = dados[0].nh3;
+		let menorTemperatura = dados[0].temperatura;
+		let maiorH2S = menorH2S;
+		let maiorUmidade = menorUmidade;
+		let maiorNH3 = menorNH3;
+		let maiorTemperatura = menorTemperatura;
+
+		for (let i = 1; i < dados.length; i++) {
+			const dado = dados[i];
+			if (menorH2S > dado.h2s)
+				menorH2S = dado.h2s;
+			if (maiorH2S < dado.h2s)
+				maiorH2S = dado.h2s;
+			if (menorUmidade > dado.umidade)
+				menorUmidade = dado.umidade;
+			if (maiorUmidade < dado.umidade)
+				maiorUmidade = dado.umidade;
+			if (menorNH3 > dado.nh3)
+				menorNH3 = dado.nh3;
+			if (maiorNH3 < dado.nh3)
+				maiorNH3 = dado.nh3;
+			if (menorTemperatura > dado.temperatura)
+				menorTemperatura = dado.temperatura;
+			if (maiorTemperatura < dado.temperatura)
+				maiorTemperatura = dado.temperatura;
+		}
+
+		let deltaH2S = (maiorH2S - menorH2S) || 1;
+		let deltaUmidade = (maiorUmidade - menorUmidade) || 1;
+		let deltaNH3 = (maiorNH3 - menorNH3) || 1;
+		let deltaTemperatura = (maiorTemperatura - menorTemperatura) || 1;
+
+		for (let h = 0; h <= 23; h++) {
+			html.push(`<tr><td>${h}:00</td>`);
+			let h2s = 0;
+			let umidade = 0;
+			let nh3 = 0;
+			let temperatura = 0;
+			for (let i = 0; i < dados.length; i++) {
+				if (dados[i].hora === h) {
+					h2s = dados[i].h2s;
+					umidade = dados[i].umidade;
+					nh3 = dados[i].nh3;
+					temperatura = dados[i].temperatura;
+					break;
+				}
+			}
+			let nH2S = (h2s - menorH2S) / deltaH2S;
+			let nUmidade = (umidade - menorUmidade) / deltaUmidade;
+			let nNH3 = (nh3 - menorNH3) / deltaNH3;
+			let nTemperatura = (temperatura - menorTemperatura) / deltaTemperatura;
+			html.push(`<td style="${coresHeatmap(nH2S)}">${h2s}</td>`);
+			html.push(`<td style="${coresHeatmap(nUmidade)}">${umidade}</td>`);
+			html.push(`<td style="${coresHeatmap(nNH3)}">${nh3}</td>`);
+			html.push(`<td style="${coresHeatmap(nTemperatura)}">${temperatura}</td>`);
+			html.push(`</tr>`);
+		}
+
+		html.push(`</tbody></table>`);
+		document.getElementById("div-heatmap").innerHTML = html.join('');
+	}
+
+	async function atualizarDados() {
 		try {
 
-			let response = await fetch("/monitorarPresencasTempoReal");
+			let response = await fetch("/monitorarTempoReal");
 
 			if (response.ok) {
 
 				Swal.close();
 
-				let div = document.getElementById("div-grafico");
-				div.innerHTML = '<canvas id="grafico-barras" style="height: 50vh;"></canvas>';
-
-				let labels = [], data = [];
-
-				let dados = await response.json();
-				if (!dados || !dados.length) {
+				let obj = await response.json();
+				if (!obj || !obj.presencas || !obj.presencas.length || !obj.odor || !obj.odor.length) {
 					Swal.fire("Erro", "Sem dados na data especificada!", "error");
 					return;
 				}
 
-				for (let i = 0; i < dados.length; i++) {
-					labels.push("Sensor " + dados[i].id_sensor);
-					data.push(dados[i].ocupacao);
-				}
-
-				let grafico = new Chart(document.getElementById("grafico-barras"), {
-					type: "bar",
-					data: {
-						labels: labels,
-						datasets: [{
-							label: "Ocupação",
-							backgroundColor: "#4e73df",
-							hoverBackgroundColor: "#2e59d9",
-							borderColor: "#4e73df",
-							data: data,
-						}],
-					},
-					options: {
-						maintainAspectRatio: false,
-						layout: {
-							padding: {
-								left: 10,
-								right: 25,
-								top: 25,
-								bottom: 0
-							}
-						},
-						scales: {
-							x: {
-								gridLines: {
-									display: false,
-									drawBorder: false
-								},
-								ticks: {
-									maxTicksLimit: 10
-								},
-								maxBarThickness: 25,
-							},
-							y: {
-								//display: false,
-								ticks: {
-									min: 0,
-									max: 10,
-									maxTicksLimit: 10,
-									padding: 10
-								},
-								gridLines: {
-									color: "rgb(234, 236, 244)",
-									zeroLineColor: "rgb(234, 236, 244)",
-									drawBorder: false,
-									borderDash: [2],
-									zeroLineBorderDash: [2]
-								}
-							},
-						},
-						legend: {
-							display: false
-						},
-						tooltips: {
-							titleMarginBottom: 10,
-							titleFontColor: '#6e707e',
-							titleFontSize: 14,
-							backgroundColor: "rgb(255,255,255)",
-							bodyFontColor: "#858796",
-							borderColor: '#dddfeb',
-							borderWidth: 1,
-							xPadding: 15,
-							yPadding: 15,
-							displayColors: false,
-							caretPadding: 10
-						},
-					}
-				});
+				gerarGrafico(obj.presencas);
+				gerarHeatmapOdor(obj.odor);
 
 			} else {
 				await exibirErro(response);
@@ -139,6 +267,8 @@
 			setTimeout(atualizarDados, 10000);
 		}
 	}
+
+	waitSwal();
 
 	atualizarDados();
 

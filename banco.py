@@ -97,6 +97,11 @@ def inserirPresencas(registros):
 		for registro in registros:
 			sessao.execute(text("INSERT INTO presenca (id, data, id_sensor, delta, bateria, ocupado) VALUES (:id, :data, :id_sensor, :delta, :bateria, :ocupado)"), registro)
 
+def inserirOdor(registros):
+	with Session(engine) as sessao, sessao.begin():
+		for registro in registros:
+			sessao.execute(text("INSERT INTO odor (id, data, id_sensor, delta, bateria, h2s, umidade, nh3, temperatura) VALUES (:id, :data, :id_sensor, :delta, :bateria, :h2s, :umidade, :nh3, :temperatura)"), registro)
+
 def monitorarPresencasTempoReal():
 	with Session(engine) as sessao:
 		registros = sessao.execute(text("""
@@ -115,7 +120,7 @@ union all
 (select id_sensor, ocupado, time_to_sec(timediff(now(), data)) delta_agora from presenca where id_sensor = 7 order by id desc limit 1)
 union all
 (select id_sensor, ocupado, time_to_sec(timediff(now(), data)) delta_agora from presenca where id_sensor = 8 order by id desc limit 1)
-;"""))
+"""))
 		presencas = []
 		for registro in registros:
 			presencas.append({
@@ -124,3 +129,27 @@ union all
 				"delta_agora": registro.delta_agora,
 			})
 		return presencas
+
+def monitorarOdorTempoReal(data):
+	with Session(engine) as sessao:
+		parametros = {
+			'data_inicial': data + ' 00:00:00',
+			'data_final': data + ' 23:59:59'
+		}
+
+		registros = sessao.execute(text("""
+select extract(hour from data) hora, max(h2s) h2s, max(umidade) umidade, max(nh3) nh3, max(temperatura) temperatura
+from odor
+where data between :data_inicial and :data_final
+group by hora
+"""), parametros)
+		odor = []
+		for registro in registros:
+			odor.append({
+				"hora": registro.hora,
+				"h2s": registro.h2s,
+				"umidade": registro.umidade,
+				"nh3": registro.nh3,
+				"temperatura": registro.temperatura,
+			})
+		return odor

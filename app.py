@@ -35,8 +35,8 @@ def obterDados():
 
     return json.jsonify(dados)
 
-@app.get('/monitorarPresencasTempoReal')
-def monitorarPresencasTempoReal():
+@app.get('/monitorarTempoReal')
+def monitorarTempoReal():
     # Obter o maior id do banco
     maior_id = banco.obterIdMaximo("presenca")
 
@@ -47,9 +47,22 @@ def monitorarPresencasTempoReal():
     if dados_novos and len(dados_novos) > 0:
         banco.inserirPresencas(dados_novos)
 
-    dados = banco.monitorarPresencasTempoReal()
+    maior_id = banco.obterIdMaximo("odor")
 
-    return json.jsonify(dados)
+    resultado = requests.get(f'{config.url_api}?sensor=odor&id_inferior={maior_id}')
+    dados_novos = resultado.json()
+
+	# Inserir os dados novos no banco
+    if dados_novos and len(dados_novos) > 0:
+        banco.inserirOdor(dados_novos)
+
+    presencas = banco.monitorarPresencasTempoReal()
+    odor = banco.monitorarOdorTempoReal(datetime.today().strftime('%Y-%m-%d'))
+
+    return json.jsonify({
+        'presencas': presencas,
+        'odor': odor,
+	})
 
 @app.post('/criar')
 def criar():

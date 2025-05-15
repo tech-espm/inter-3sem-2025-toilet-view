@@ -25,6 +25,24 @@ CREATE TABLE presenca (
   KEY presenca_id_sensor (id_sensor)
 );
 
+-- topic v3/espm/devices/odor01/up
+-- topic v3/espm/devices/odor02/up
+-- { "end_device_ids": { "device_id": "odor01" }, "uplink_message": { "rx_metadata": [{ "timestamp": 2040934975 }], "decoded_payload": { "battery": 99, "h2s": 0.02, "humidity": 78, "nh3": 0.01, "temperature": 24.3 } } }
+CREATE TABLE odor (
+  id bigint NOT NULL AUTO_INCREMENT,
+  data datetime NOT NULL,
+  id_sensor tinyint NOT NULL,
+  delta int NOT NULL,
+  bateria tinyint NOT NULL,
+  h2s float NOT NULL,
+  umidade float NOT NULL,
+  nh3 float NOT NULL,
+  temperatura float NOT NULL,
+  PRIMARY KEY (id),
+  KEY odor_data_id_sensor (data, id_sensor),
+  KEY odor_id_sensor (id_sensor)
+);
+
 -- Query para monitorar em tempo real
 (select id_sensor, ocupado, time_to_sec(timediff(now(), data)) delta_agora from presenca where id_sensor = 1 order by id desc limit 1)
 union all
@@ -42,6 +60,11 @@ union all
 union all
 (select id_sensor, ocupado, time_to_sec(timediff(now(), data)) delta_agora from presenca where id_sensor = 8 order by id desc limit 1)
 ;
+
+select extract(hour from data) hora, max(h2s) h2s, max(umidade) umidade, max(nh3) nh3, max(temperatura) temperatura
+from odor
+where data between '2025-03-03 00:00:00' and '2025-03-14 23:59:59'
+group by hora;
 
 -- Query com a total de presença por dia
 select id_sensor, date(data) dia, sum(delta) presenca_total from presenca
