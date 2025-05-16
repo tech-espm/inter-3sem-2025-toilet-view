@@ -2,98 +2,118 @@
 
 {% block body %}
 
-<style>
-	.padding{
-		padding: 25px;
-	}
+<div class="secao1-sobre">
+  <div class="row d-flex align-items-center justify-content-center">
 
+    <div class="col-sm-6">
+      <h2><strong>Sobre Nós</strong></h2>
+      <p class="txt-desc">
+        Somos um grupo de alunos da ESPM - São Paulo, atualmente no terceiro semestre do curso de Sistemas de Informação.
+      </p>
+    </div>
 
-	.container {
-		display: flex;
-		gap: 20px;
-	}
+    <div class="col-sm-6 imagem-decorada-container">
+      <div class="quadrado-fundo-1"></div>
+      <div class="quadrado-fundo-2"></div>
+      <img src="{{ url_for('static', filename='img/nossafoto.jpg') }}" alt="nós" class="imagem-decorada">
+    </div>
 
-	.ttl-sobrenos {
-		color: #8a2be2;
-		font-size: 36px;
-		margin-bottom: 20px;
-	}
-
-	.texto-sobre-nos {
-		flex: 2;
-		border: 2px solid #8a2be2;
-		border-radius: 10px;
-		padding: 20px;
-		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-	}
-
-	.texto-sobre-nos p {
-		font-size: 16px;
-		line-height: 1.6;
-		color: #333;
-		margin: 0;
-		margin-bottom: 10px;
-	}
-
-	.image-box {
-		flex: 1;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 20px;
-		max-height: 200px;
-		border-radius: 8px
-	}
-
-	.foto-nossa-box {
-		border: 2px solid #8a2be2;
-		border-radius: 10px;
-		width: 100%;
-		max-height: 240px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		color: #333;
-		font-size: 18px;
-		text-align: center;
-	}
-
-	.espm-logo {
-		width: 150px;
-		max-width: 350px;
-		margin: 50px auto;
-	}
-</style>
-
-<div class="container padding">
-	<div class="texto-sobre-nos">
-
-		<h1 class="titulo">
-			Sobre nós
-		</h1>
-
-		<p>
-			Somos um grupo de seis alunos da ESPM, movidos pelo desejo de utilizar a tecnologia para aprimorar a experiência e a gestão de espaços compartilhados. Nosso projeto surgiu da necessidade de otimizar o uso de banheiros públicos e coletivos, garantindo maior conforto, praticidade e higiene para os usuários por meio de sensores inteligentes.
-			Com o avanço da automação e da Internet das Coisas (IoT), acreditamos que implementar soluções de monitoramento pode contribuir significativamente para a eficiência na manutenção e no uso responsável de recursos.
-			Nossa missão é facilitar a gestão de banheiros coletivos, proporcionando aos usuários informações em tempo real sobre a disponibilidade das cabines e a qualidade do ambiente. Dessa forma, promovemos não apenas conveniência, mas também um espaço mais organizado e higiênico para todos.
-		</p>
-		
-	</div>
-
-	<div>
-		<div class="foto-nossa-box">
-			<img src="/static/img/nossafoto.jpg"  class="image-box">
-		</div>
-
-		<div class="espm-logo">
-			<img src="/static/img/espm-logo.jpg">
-		</div>
-		
-	</div>
+  </div>
 </div>
 
+<div class="secao2-nosso-comeco">
+  <div class="container secao2-grid">
 
+    <!-- Coluna Esquerda: Imagens -->
+    <div class="coluna-imagens">
+      <!-- Parte superior com duas imagens em grid -->
+      <div class="coluna-imagens-superior">
+        <img src="{{ url_for('static', filename='img/logo1.png') }}" alt="Imagem 1">
+        <img src="{{ url_for('static', filename='img/logo2.png') }}" alt="Imagem 2">
+      </div>
 
+      <!-- Parte inferior com imagem larga -->
+      <div class="coluna-imagens-inferior">
+        <img src="{{ url_for('static', filename='img/logo-grande.png') }}" alt="Imagem grande">
+      </div>
+    </div>
 
+    <!-- Coluna Direita: Texto -->
+    <div class="coluna-texto">
+      <h2>Nosso começo</h2>
+      <p>
+        Tudo começou com uma ideia meio maluca, algumas brincadeiras em grupo e aquela vontade de fazer algo diferente. Aos poucos, o que era só papo se transformou em projeto. Juntamos nossas forças, dividimos o trabalho e criamos o Toilet View — do nosso jeito, com propósito, aprendizado e muita zoeira no caminho. Mas acima de tudo, fizemos algo útil, nosso.
+      </p>
+    </div>
+
+  </div>
+</div>
+
+<div class="secao3-nossa-equipe">
+  <h2>Nossa Equipe</h2>
+  <div class="grid-equipe">
+
+    <!-- Membro 1 -->
+    <div class="card-membro">
+      <img src="{{ url_for('static', filename='img/gabriel.jpg') }}" alt="Pablo Dimitrof">
+      <h3>Pablo Dimitrof</h3>
+      <div class="icones-sociais">
+        <a href="https://www.linkedin.com/in/gabriel" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/gabriel" target="_blank" class="github"><i class="fab fa-github"></i></a>
+      </div>
+    </div>
+
+    <!-- Membro 2 -->
+    <div class="card-membro">
+      <img src="{{ url_for('static', filename='img/eduardio.jpg') }}" alt="José Longo">
+      <h3>José Longo</h3>
+      <div class="icones-sociais">
+        <a href="https://www.linkedin.com/in/eduardio" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/eduardio" target="_blank" class="github"><i class="fab fa-github"></i></a>
+      </div>
+    </div>
+
+    <!-- Membro 3 -->
+    <div class="card-membro">
+      <img src="{{ url_for('static', filename='img/joao.jpg') }}" alt="Martim Ponzio">
+      <h3>Martim Ponzio</h3>
+      <div class="icones-sociais">
+        <a href="https://www.linkedin.com/in/joao" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/joao" target="_blank" class="github"><i class="fab fa-github"></i></a>
+      </div>
+    </div>
+
+    <!-- Membro 4 -->
+    <div class="card-membro">
+      <img src="{{ url_for('static', filename='img/victor.jpg') }}" alt="Pedro Maricate">
+      <h3>Pedro Maricate</h3>
+      <div class="icones-sociais">
+        <a href="https://www.linkedin.com/in/victor" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/victor" target="_blank" class="github"><i class="fab fa-github"></i></a>
+      </div>
+    </div>
+
+    <!-- Membro 5 -->
+    <div class="card-membro">
+      <img src="{{ url_for('static', filename='img/caio.jpg') }}" alt="Enzo Malagoli">
+      <h3>Enzo Malagoli</h3>
+      <div class="icones-sociais">
+        <a href="https://www.linkedin.com/in/caio" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/caio" target="_blank" class="github"><i class="fab fa-github"></i></a>
+      </div>
+    </div>
+
+    <!-- Membro 6 -->
+    <div class="card-membro">
+      <img src="{{ url_for('static', filename='img/pedro.jpg') }}" alt="Eduardo Gul">
+      <h3>Eduardo Gul</h3>
+      <div class="icones-sociais">
+        <a href="https://www.linkedin.com/in/pedro" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/pedro" target="_blank" class="github"><i class="fab fa-github"></i></a>
+      </div>
+    </div>
+
+  </div>
+</div>
 
 {% endblock %}
