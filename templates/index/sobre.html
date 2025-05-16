@@ -4,94 +4,99 @@
 
 <style>
 	.padding{
-		padding: 25px;
+		padding: 40px 20px;
 	}
 
-
-	.container {
-		display: flex;
-		gap: 20px;
-	}
-
-	.ttl-sobrenos {
-		color: #8a2be2;
-		font-size: 36px;
-		margin-bottom: 20px;
-	}
-
-	.texto-sobre-nos {
-		flex: 2;
-		border: 2px solid #8a2be2;
-		border-radius: 10px;
-		padding: 20px;
-		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-	}
-
-	.texto-sobre-nos p {
-		font-size: 16px;
-		line-height: 1.6;
-		color: #333;
-		margin: 0;
-		margin-bottom: 10px;
-	}
-
-	.image-box {
-		flex: 1;
+	.container{
+		border-left: 2px solid black;
+		border-right: 2px solid black;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		gap: 20px;
-		max-height: 200px;
-		border-radius: 8px
+		gap: 50px;
 	}
 
-	.foto-nossa-box {
-		border: 2px solid #8a2be2;
-		border-radius: 10px;
-		width: 100%;
-		max-height: 240px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		color: #333;
-		font-size: 18px;
+	.titulo{
+		font-size: 28px;
+		text-align: center;
+		margin: 0;
+	}
+
+	.foto-equipe{
+		width: 300px;
+		max-width: 90%;
+		border-radius: 8px;
+	}
+
+	.texto-intro{
+		max-width: 600px;
+		font-size: 16px;
+		line-height: 1.6;
 		text-align: center;
 	}
 
-	.espm-logo {
-		width: 150px;
-		max-width: 350px;
-		margin: 50px auto;
+	.projeto-container{
+		display: flex;
+		gap: 30px;
+		align-items: center;
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+
+	.projeto-texto{
+		flex: 1 1 250px;
+		font-size: 16px;
+		line-height: 1.6;
+	}
+
+	.logo-box{
+		position: relative;
+		width: 220px;
+		height: 220px;
+		flex: 0 0 220px;
+	}
+
+	.logo-fundo{
+		position: absolute;
+		top: 15px;
+		left: 15px;
+		width: 100%;
+		height: 100%;
+		background: #284f97;
+		border-radius: 15px;
+	}
+
+	.logo-img{
+		position: relative;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		border-radius: 15px;
 	}
 </style>
 
 <div class="container padding">
-	<div class="texto-sobre-nos">
+	<h1 class="titulo">Sobre Nós</h1>
 
-		<h1 class="titulo">
-			Sobre nós
-		</h1>
+	<img src="/static/img/nossafoto.jpg" alt="Foto do grupo" class="foto-equipe">
 
-		<p>
-			Somos um grupo de seis alunos da ESPM, movidos pelo desejo de utilizar a tecnologia para aprimorar a experiência e a gestão de espaços compartilhados. Nosso projeto surgiu da necessidade de otimizar o uso de banheiros públicos e coletivos, garantindo maior conforto, praticidade e higiene para os usuários por meio de sensores inteligentes.
-			Com o avanço da automação e da Internet das Coisas (IoT), acreditamos que implementar soluções de monitoramento pode contribuir significativamente para a eficiência na manutenção e no uso responsável de recursos.
-			Nossa missão é facilitar a gestão de banheiros coletivos, proporcionando aos usuários informações em tempo real sobre a disponibilidade das cabines e a qualidade do ambiente. Dessa forma, promovemos não apenas conveniência, mas também um espaço mais organizado e higiênico para todos.
+	<p class="texto-intro">
+		Somos um grupo de alunos da ESPM – São Paulo, atualmente no terceiro semestre do curso de Sistemas de Informação.
+		Nosso grupo surgiu da vontade de criar um projeto que gerasse inovação e impactasse positivamente negócios.
+	</p>
+
+	<div class="projeto-container">
+		<p class="projeto-texto">
+			Por isso, quando recebemos a proposta de criar um produto com o uso de sensores para o Projeto Integrado,
+			após muito brainstorming, chegamos à ideia que representa nosso projeto final: <strong>Toilet View</strong>.
 		</p>
-		
-	</div>
 
-	<div>
-		<div class="foto-nossa-box">
-			<img src="/static/img/nossafoto.jpg"  class="image-box">
+		<div class="logo-box">
+			<div class="logo-fundo"></div>
+			<img src="/static/img/logotoiletview.png" alt="Logo Toilet View" class="logo-img">
 		</div>
-
-		<div class="espm-logo">
-			<img src="/static/img/espm-logo.jpg">
-		</div>
-		
 	</div>
 </div>
-
 
 
 
