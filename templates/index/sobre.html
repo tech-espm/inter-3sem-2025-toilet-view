@@ -2,103 +2,118 @@
 
 {% block body %}
 
-<style>
-	.padding{
-		padding: 40px 20px;
-	}
+<div class="secao1-sobre">
+  <div class="row d-flex align-items-center justify-content-center">
 
-	.container{
-		border-left: 2px solid black;
-		border-right: 2px solid black;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 50px;
-	}
+    <div class="col-sm-6">
+      <h2><strong>Sobre Nós</strong></h2>
+      <p class="txt-desc">
+        Somos um grupo de alunos da ESPM - São Paulo, atualmente no terceiro semestre do curso de Sistemas de Informação.
+      </p>
+    </div>
 
-	.titulo{
-		font-size: 28px;
-		text-align: center;
-		margin: 0;
-	}
+    <div class="col-sm-6 imagem-decorada-container">
+      <div class="quadrado-fundo-1"></div>
+      <div class="quadrado-fundo-2"></div>
+      <img src="{{ url_for('static', filename='img/nossafoto.jpg') }}" alt="nós" class="imagem-decorada">
+    </div>
 
-	.foto-equipe{
-		width: 300px;
-		max-width: 90%;
-		border-radius: 8px;
-	}
-
-	.texto-intro{
-		max-width: 600px;
-		font-size: 16px;
-		line-height: 1.6;
-		text-align: center;
-	}
-
-	.projeto-container{
-		display: flex;
-		gap: 30px;
-		align-items: center;
-		justify-content: center;
-		flex-wrap: wrap;
-	}
-
-	.projeto-texto{
-		flex: 1 1 250px;
-		font-size: 16px;
-		line-height: 1.6;
-	}
-
-	.logo-box{
-		position: relative;
-		width: 220px;
-		height: 220px;
-		flex: 0 0 220px;
-	}
-
-	.logo-fundo{
-		position: absolute;
-		top: 15px;
-		left: 15px;
-		width: 100%;
-		height: 100%;
-		background: #284f97;
-		border-radius: 15px;
-	}
-
-	.logo-img{
-		position: relative;
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-		border-radius: 15px;
-	}
-</style>
-
-<div class="container padding">
-	<h1 class="titulo">Sobre Nós</h1>
-
-	<img src="/static/img/nossafoto.jpg" alt="Foto do grupo" class="foto-equipe">
-
-	<p class="texto-intro">
-		Somos um grupo de alunos da ESPM – São Paulo, atualmente no terceiro semestre do curso de Sistemas de Informação.
-		Nosso grupo surgiu da vontade de criar um projeto que gerasse inovação e impactasse positivamente negócios.
-	</p>
-
-	<div class="projeto-container">
-		<p class="projeto-texto">
-			Por isso, quando recebemos a proposta de criar um produto com o uso de sensores para o Projeto Integrado,
-			após muito brainstorming, chegamos à ideia que representa nosso projeto final: <strong>Toilet View</strong>.
-		</p>
-
-		<div class="logo-box">
-			<div class="logo-fundo"></div>
-			<img src="/static/img/logotoiletview.png" alt="Logo Toilet View" class="logo-img">
-		</div>
-	</div>
+  </div>
 </div>
 
+<div class="secao2-nosso-comeco">
+  <div class="container secao2-grid">
 
+    <!-- Coluna Esquerda: Imagens -->
+    <div class="coluna-imagens">
+      <!-- Parte superior com duas imagens em grid -->
+      <div class="coluna-imagens-superior">
+        <img src="{{ url_for('static', filename='img/logo1.png') }}" alt="Imagem 1">
+        <img src="{{ url_for('static', filename='img/logo2.png') }}" alt="Imagem 2">
+      </div>
 
+      <!-- Parte inferior com imagem larga -->
+      <div class="coluna-imagens-inferior">
+        <img src="{{ url_for('static', filename='img/logo-grande.png') }}" alt="Imagem grande">
+      </div>
+    </div>
+
+    <!-- Coluna Direita: Texto -->
+    <div class="coluna-texto">
+      <h2>Nosso começo</h2>
+      <p>
+        Tudo começou com uma ideia meio maluca, algumas brincadeiras em grupo e aquela vontade de fazer algo diferente. Aos poucos, o que era só papo se transformou em projeto. Juntamos nossas forças, dividimos o trabalho e criamos o Toilet View — do nosso jeito, com propósito, aprendizado e muita zoeira no caminho. Mas acima de tudo, fizemos algo útil, nosso.
+      </p>
+    </div>
+
+  </div>
+</div>
+
+<div class="secao3-nossa-equipe">
+  <h2>Nossa Equipe</h2>
+  <div class="grid-equipe">
+
+    <!-- Membro 1 -->
+    <div class="card-membro">
+      <img src="{{ url_for('static', filename='img/gabriel.jpg') }}" alt="Pablo Dimitrof">
+      <h3>Pablo Dimitrof</h3>
+      <div class="icones-sociais">
+        <a href="https://www.linkedin.com/in/gabriel" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/gabriel" target="_blank" class="github"><i class="fab fa-github"></i></a>
+      </div>
+    </div>
+
+    <!-- Membro 2 -->
+    <div class="card-membro">
+      <img src="{{ url_for('static', filename='img/eduardio.jpg') }}" alt="José Longo">
+      <h3>José Longo</h3>
+      <div class="icones-sociais">
+        <a href="https://www.linkedin.com/in/eduardio" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/eduardio" target="_blank" class="github"><i class="fab fa-github"></i></a>
+      </div>
+    </div>
+
+    <!-- Membro 3 -->
+    <div class="card-membro">
+      <img src="{{ url_for('static', filename='img/joao.jpg') }}" alt="Martim Ponzio">
+      <h3>Martim Ponzio</h3>
+      <div class="icones-sociais">
+        <a href="https://www.linkedin.com/in/joao" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/joao" target="_blank" class="github"><i class="fab fa-github"></i></a>
+      </div>
+    </div>
+
+    <!-- Membro 4 -->
+    <div class="card-membro">
+      <img src="{{ url_for('static', filename='img/victor.jpg') }}" alt="Pedro Maricate">
+      <h3>Pedro Maricate</h3>
+      <div class="icones-sociais">
+        <a href="https://www.linkedin.com/in/victor" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/victor" target="_blank" class="github"><i class="fab fa-github"></i></a>
+      </div>
+    </div>
+
+    <!-- Membro 5 -->
+    <div class="card-membro">
+      <img src="{{ url_for('static', filename='img/caio.jpg') }}" alt="Enzo Malagoli">
+      <h3>Enzo Malagoli</h3>
+      <div class="icones-sociais">
+        <a href="https://www.linkedin.com/in/caio" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/caio" target="_blank" class="github"><i class="fab fa-github"></i></a>
+      </div>
+    </div>
+
+    <!-- Membro 6 -->
+    <div class="card-membro">
+      <img src="{{ url_for('static', filename='img/pedro.jpg') }}" alt="Eduardo Gul">
+      <h3>Eduardo Gul</h3>
+      <div class="icones-sociais">
+        <a href="https://www.linkedin.com/in/pedro" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/pedro" target="_blank" class="github"><i class="fab fa-github"></i></a>
+      </div>
+    </div>
+
+  </div>
+</div>
 
 {% endblock %}
