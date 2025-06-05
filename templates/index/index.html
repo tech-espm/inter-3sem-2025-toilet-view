@@ -16,29 +16,66 @@
 	</div>
 
 
-	<div class="secao1">
-		
-		<div class ="row">
-				<div class="col-sm-4">
-					<h1>Bem vindo ao Toilet View</h1>
-					<p class="txt-desc">
-					O Toilet View é uma solução tecnológica para monitoramento de banheiros públicos e corporativos. 
-					Utilizando sensores de presença e qualidade do ar, o sistema informa em tempo real a ocupação das 
-					cabines e a necessidade de limpeza, garantindo mais conforto, eficiência e higiene para os usuários.
-					</p>
-				</div>
+<div class="secao1-sobre-projeto">
+  <div class="container d-flex justify-content-between align-items-center flex-wrap">
 
-				<div class="col-sm-4">
-					BANANA
-				</div>
-		
-			</div>
-	</div>
+    <!-- Coluna esquerda: logotipo -->
+    <div class="coluna-logo">
+      <img src="{{ url_for('static', filename='img/logo-toiletview.png') }}" alt="Logo Toilet View" class="logo-projeto">
+      <p class="subtexto-logo">
+        O projeto foi idealizado para ambientes com alto fluxo de pessoas, como universidades, shoppings, aeroportos e empresas.
+      </p>
+    </div>
+
+    <!-- Coluna direita: texto -->
+    <div class="coluna-texto-projeto">
+      <h2>Sobre o Projeto</h2>
+      <h4>Por que criamos o Toilet View?</h4>
+      <p>
+        Banheiros de uso coletivo geralmente sofrem com filas, falta de manutenção e incerteza sobre sua condição de uso.
+        Pensando nisso, desenvolvemos um sistema inteligente que torna possível visualizar quais cabines estão livres
+        e quando a limpeza é necessária — tudo por meio de sensores discretos e eficientes.
+      </p>
+      <p>
+        Ele é fácil de integrar, oferece visualizações intuitivas e ajuda na otimização da equipe de limpeza.
+      </p>
+    </div>
+
+  </div>
+</div>
 
 
-	<div class="secao2">
-		<h1>Sobre o Projeto</h1>
-	</div>
+<div class="secao2-sensores">
+  <div class="container sensores-grid">
+
+    <!-- Sensor de Ocupação -->
+    <div class="sensor-item">
+      <h3>Sensor de Ocupação (VS340-915M)</h3>
+      <div class="imagem-circular">
+        <img src="{{ url_for('static', filename='img/sensor-presenca.jpg') }}" alt="Sensor de Ocupação">
+      </div>
+      <p class="sensor-desc">
+        Este sensor é instalado dentro das cabines para detectar presença com precisão.
+        Seu funcionamento é baseado em detecção por movimento e presença, o que permite
+        informar em tempo real se a cabine está ocupada ou livre.
+      </p>
+    </div>
+
+    <!-- Sensor de Odor -->
+    <div class="sensor-item">
+      <h3>Sensor de Odor (GS301-915M)</h3>
+      <div class="imagem-circular">
+        <img src="{{ url_for('static', filename='img/sensor-odor.jpg') }}" alt="Sensor de Odor">
+      </div>
+      <p class="sensor-desc">
+        Responsável por monitorar a qualidade do ar, este sensor detecta gases e compostos
+        orgânicos voláteis (VOCs). Quando os níveis ultrapassam um limite pré-definido,
+        o sistema sugere a necessidade de limpeza no ambiente.
+      </p>
+    </div>
+
+  </div>
+</div>
 
 	<div class="secao3">
 		<h1>Sensores</h1>
