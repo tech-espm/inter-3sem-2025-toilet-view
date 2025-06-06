@@ -17,6 +17,23 @@ html, body {
 	flex-wrap: nowrap;
 }
 
+.navbar {
+  background-color: #242424;
+}
+
+.navbar a,
+.navbar .nav-link,
+.navbar .navbar-brand {
+    color: white !important;
+    text-decoration: none;
+}
+
+.navbar a:hover,
+.navbar .nav-link:hover,
+.navbar .navbar-brand:hover {
+    color: grey !important;
+}
+
 .conteudo {
 	/* Para fazer o rodapé ficar sempre na parte inferior da página ;) */
 	flex: 1 1 auto;
@@ -198,41 +215,60 @@ html, body {
 	padding: 100px 0px;
 }
 
+.secao1-sobre .row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.secao1-sobre .col-sm-6 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .imagem-decorada-container {
-	position: relative;
-	width: fit-content;
-	margin: auto;
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  margin: auto;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .imagem-decorada {
 	position: relative;
-	z-index: 3;
+	z-index: 2;
 	width: 100%;
 	max-width: 400px;
 	border-radius: 10px;
 	box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+  display: block;
 }
 
 .quadrado-fundo-1,
 .quadrado-fundo-2 {
 	position: absolute;
 	width: 100%;
-	max-width: 400px;
+	max-width: 370px;
 	height: 100%;
-	z-index: 1;
+	left: 0;
 	border-radius: 10px;
 }
 
 .quadrado-fundo-1 {
-	top: 12px;
-	left: -12px;
+	top: -10px;
+	left: 25px;
 	background-color: #2e2e2e;
 	z-index: 1;
 }
 
 .quadrado-fundo-2 {
-	top: 24px;
-	left: -24px;
+	top: 10px;
+	left: 5px;
 	background-color: #000;
 	z-index: 0;
 }
@@ -264,7 +300,7 @@ html, body {
 
 .coluna-imagens-superior img,
 .coluna-imagens-inferior img {
-  width: 100%;
+  max-width: 100%;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   object-fit: cover;
@@ -311,12 +347,15 @@ html, body {
 
 /* Cartão de cada pessoa */
 .card-membro {
-  background-color: #ffffff;
+  background-color: #242424;
   border-radius: 16px;
   padding: 1.5rem;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   text-align: center;
   transition: transform 0.2s;
+  max-width: 200px;
+  width: 100%;
+  color: white;
 }
 
 .card-membro:hover {
@@ -330,7 +369,7 @@ html, body {
   border-radius: 50%;
   object-fit: cover;
   margin-bottom: 1rem;
-  border: 3px solid #1b1f23;
+  border: 3px solid white;
 }
 
 /* Nome da pessoa */
@@ -346,6 +385,8 @@ html, body {
   margin: 0 0.4rem;
   font-size: 1.4rem;
   transition: color 0.2s;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 /* Hover personalizado para LinkedIn e GitHub */
@@ -355,4 +396,12 @@ html, body {
 
 .icones-sociais a.github:hover {
   color: #6e40c9; /* Roxo do GitHub */
+}
+
+.icones-sociais img{
+  margin-top: 20px;
+  max-width: 50px;
+  max-height: 50px;
+  vertical-align: middle;
+  border: 0;
 }

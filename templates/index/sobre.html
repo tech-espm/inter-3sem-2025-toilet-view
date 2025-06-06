@@ -3,21 +3,23 @@
 {% block body %}
 
 <div class="secao1-sobre">
-  <div class="row d-flex align-items-center justify-content-center">
+  <div class = "container-fluid">
+    <div class="row d-flex align-items-center justify-content-center">
 
-    <div class="col-sm-6">
-      <h2><strong>Sobre Nós</strong></h2>
-      <p class="txt-desc">
-        Somos um grupo de alunos da ESPM - São Paulo, atualmente no terceiro semestre do curso de Sistemas de Informação.
-      </p>
+      <div class="col-sm-6">
+        <h2><strong>Sobre Nós</strong></h2>
+        <p class="txt-desc">
+          Somos um grupo de alunos da ESPM - São Paulo, atualmente no terceiro semestre do curso de Sistemas de Informação.
+        </p>
+      </div>
+
+      <div class="col-sm-6 imagem-decorada-container">
+        <div class="quadrado-fundo-1"></div>
+        <div class="quadrado-fundo-2"></div>
+        <img src="{{ url_for('static', filename='img/nossafoto.jpg') }}" alt="nós" class="imagem-decorada">
+      </div>
+
     </div>
-
-    <div class="col-sm-6 imagem-decorada-container">
-      <div class="quadrado-fundo-1"></div>
-      <div class="quadrado-fundo-2"></div>
-      <img src="{{ url_for('static', filename='img/nossafoto.jpg') }}" alt="nós" class="imagem-decorada">
-    </div>
-
   </div>
 </div>
 
@@ -50,56 +52,56 @@
   <div class="grid-equipe">
 
     <div class="card-membro">
-      <img src="{{ url_for('static', filename='img/cubokevin.png') }}" alt="Pablo Dimitrof">
+      <img src="{{ url_for('static', filename='img/pablack.png') }}" alt="Pablo Dimitrof">
       <h3>Pablo Dimitrof</h3>
       <div class="icones-sociais">
-        <a href="https://www.linkedin.com/in/gabriel" target="_blank"><i class="fab fa-linkedin"></i></a>
-        <a href="https://github.com/gabriel" target="_blank" class="github"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/pablo-dimitrof-b5b3b62b3/" target="_blank"> <img src="{{ url_for('static', filename='img/linkedin.png') }}" alt="Linkedin"></a>
+        <a href="https://github.com/PabloDimitrof" target="_blank" class="github"><img src="{{ url_for('static', filename='img/github.png') }}" alt="Github"></a>
       </div>
     </div>
 
     <div class="card-membro">
-      <img src="{{ url_for('static', filename='img/cubokevin.png') }}" alt="José Longo">
+      <img src="{{ url_for('static', filename='img/ratao.png') }}" alt="José Longo">
       <h3>José Longo</h3>
       <div class="icones-sociais">
-        <a href="https://www.linkedin.com/in/eduardio" target="_blank"><i class="fab fa-linkedin"></i></a>
-        <a href="https://github.com/eduardio" target="_blank" class="github"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/jos%C3%A9-longo/" target="_blank"> <img src="{{ url_for('static', filename='img/linkedin.png') }}" alt="Linkedin"></a>
+        <a href="https://github.com/Jose-Longo-A" target="_blank" class="github"><img src="{{ url_for('static', filename='img/github.png') }}" alt="Github"></a>
       </div>
     </div>
 
     <div class="card-membro">
-      <img src="{{ url_for('static', filename='img/cubokevin.png') }}" alt="Martim Ponzio">
+      <img src="{{ url_for('static', filename='img/gordin.png') }}" alt="Martim Ponzio">
       <h3>Martim Ponzio</h3>
       <div class="icones-sociais">
-        <a href="https://www.linkedin.com/in/joao" target="_blank"><i class="fab fa-linkedin"></i></a>
-        <a href="https://github.com/joao" target="_blank" class="github"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/martim-rozanczyk-ponzio-0083b82b3/" target="_blank"> <img src="{{ url_for('static', filename='img/linkedin.png') }}" alt="Linkedin"></a>
+        <a href="https://github.com/martimponzio" target="_blank" class="github"><img src="{{ url_for('static', filename='img/github.png') }}" alt="Github"></a>
       </div>
     </div>
 
     <div class="card-membro">
-      <img src="{{ url_for('static', filename='img/cubokevin.png') }}" alt="Pedro Maricate">
+      <img src="{{ url_for('static', filename='img/pe.png') }}" alt="Pedro Maricate">
       <h3>Pedro Maricate</h3>
       <div class="icones-sociais">
-        <a href="https://www.linkedin.com/in/victor" target="_blank"><i class="fab fa-linkedin"></i></a>
-        <a href="https://github.com/victor" target="_blank" class="github"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/pedro-almeida-maricate-santos-7467572b2/" target="_blank"> <img src="{{ url_for('static', filename='img/linkedin.png') }}" alt="Linkedin"></a>
+        <a href="https://github.com/PedroMaricate" target="_blank" class="github"><img src="{{ url_for('static', filename='img/github.png') }}" alt="Github"></a>
       </div>
     </div>
 
     <div class="card-membro">
-      <img src="{{ url_for('static', filename='img/cubokevin.png') }}" alt="Enzo Malagoli">
+      <img src="{{ url_for('static', filename='img/tatin.png') }}" alt="Enzo Malagoli">
       <h3>Enzo Malagoli</h3>
       <div class="icones-sociais">
-        <a href="https://www.linkedin.com/in/caio" target="_blank"><i class="fab fa-linkedin"></i></a>
-        <a href="https://github.com/caio" target="_blank" class="github"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/enzo-de-marchi-malagoli-ab73b52b3/" target="_blank"> <img src="{{ url_for('static', filename='img/linkedin.png') }}" alt="Linkedin"></a>
+        <a href="https://github.com/EnzoMalagoli" target="_blank" class="github"><img src="{{ url_for('static', filename='img/github.png') }}" alt="Github"></a>
       </div>
     </div>
 
     <div class="card-membro">
-      <img src="{{ url_for('static', filename='img/cubokevin.png') }}" alt="Eduardo Gul">
+      <img src="{{ url_for('static', filename='img/lanches.png') }}" alt="Eduardo Gul">
       <h3>Eduardo Gul</h3>
       <div class="icones-sociais">
-        <a href="https://www.linkedin.com/in/pedro" target="_blank"><i class="fab fa-linkedin"></i></a>
-        <a href="https://github.com/pedro" target="_blank" class="github"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/eduardo-gul-d%E2%80%99%C3%A1vila-2575b5270/" target="_blank"> <img src="{{ url_for('static', filename='img/linkedin.png') }}" alt="Linkedin"></a>
+        <a href="https://github.com/eduardogd09" target="_blank" class="github"><img src="{{ url_for('static', filename='img/github.png') }}" alt="Github"></a>
       </div>
     </div>
 
