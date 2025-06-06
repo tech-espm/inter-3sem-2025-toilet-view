@@ -79,8 +79,8 @@ html, body {
 
 /* Seção 1 - index - Sobre o Projeto */
 .secao1-sobre-projeto {
-  background-color: #1c1c1c;
-  color: white;
+  background-color: white;
+  color: black;
   padding: 80px 0;
 }
 
@@ -106,7 +106,7 @@ html, body {
 .subtexto-logo {
   font-size: 0.95rem;
   text-align: justify;
-  color: #e0e0e0;
+  color: black;
   max-width: 350px;
   margin: 0 auto;
 }
@@ -118,13 +118,7 @@ html, body {
 
 .coluna-texto-projeto h2 {
   font-size: 2rem;
-  margin-bottom: 0.3rem;
-}
-
-.coluna-texto-projeto h4 {
-  font-weight: normal;
-  color: #ccc;
-  margin-bottom: 1.2rem;
+  margin-bottom: 30px;
 }
 
 .coluna-texto-projeto p {
@@ -136,7 +130,7 @@ html, body {
 
 /* secão 2 - sensores - index*/
 .secao2-sensores {
-  background-color: #f5f5f5;
+  background-color: #242424;
   padding: 80px 0;
   text-align: center;
 }
@@ -146,6 +140,7 @@ html, body {
   flex-wrap: wrap;
   justify-content: center;
   gap: 4rem;
+  color: white;
 }
 
 .sensor-item {
@@ -156,7 +151,6 @@ html, body {
 .sensor-item h3 {
   font-size: 1.25rem;
   margin-bottom: 1rem;
-  color: #1a1a1a;
 }
 
 .imagem-circular {
@@ -177,7 +171,6 @@ html, body {
 .sensor-desc {
   font-size: 1rem;
   line-height: 1.6;
-  color: #333;
   max-width: 90%;
   margin: 0 auto;
 }
@@ -220,6 +213,7 @@ html, body {
   align-items: center;
   justify-content: center;
   text-align: center;
+  flex-wrap: wrap;
 }
 
 .secao1-sobre .col-sm-6 {
@@ -231,9 +225,8 @@ html, body {
 .imagem-decorada-container {
   position: relative;
   width: 100%;
-  max-width: 400px;
+  max-width: 500px;
   margin: auto;
-  height: auto;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -243,7 +236,7 @@ html, body {
 	position: relative;
 	z-index: 2;
 	width: 100%;
-	max-width: 400px;
+	max-width: 500px;
 	border-radius: 10px;
 	box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
   display: block;
@@ -253,22 +246,22 @@ html, body {
 .quadrado-fundo-2 {
 	position: absolute;
 	width: 100%;
-	max-width: 370px;
+	max-width: 250px;
 	height: 100%;
-	left: 0;
+  max-height: 150px;
 	border-radius: 10px;
 }
 
 .quadrado-fundo-1 {
-	top: -10px;
-	left: 25px;
+	top: -25px;
+	left: 265px;
 	background-color: #2e2e2e;
 	z-index: 1;
 }
 
 .quadrado-fundo-2 {
-	top: 10px;
-	left: 5px;
+	top: 230px;
+	left: -15px;
 	background-color: #000;
 	z-index: 0;
 }
