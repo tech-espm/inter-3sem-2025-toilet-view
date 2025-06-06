@@ -31,7 +31,7 @@ def obterDados():
     if dados_novos and len(dados_novos) > 0:
         banco.inserirPresencas(dados_novos)
 
-    dados = banco.listarPresencas()
+    dados = banco.monitorarPresencasTempoReal()
 
     return json.jsonify(dados)
 

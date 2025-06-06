@@ -2,11 +2,18 @@
 
 {% block body %}
 
-<div class="container-fluid">
+<div class="container">
 
-	<h1>
-		Projeto
+	<h1 class="my-4 text-center">
+		Monitoramento em Tempo Real
 	</h1>
+
+	<div class="text-center my-2">
+		<div class="mb-2">
+			<b>Última atualização:</b>
+			<span id="ultimaAtualizacao">-</span>
+		</div>
+	</div>
 
     <div class="card shadow my-4">
         <div class="card-body">
@@ -82,13 +89,13 @@
 
 	function gerarGrafico(dados) {
 		let div = document.getElementById("div-grafico");
-		div.innerHTML = '<canvas id="grafico-barras" style="height: 50vh;"></canvas>';
+		div.innerHTML = '<canvas id="grafico-barras" style="height: 20vh;"></canvas>';
 
 		let labels = [], data = [];
 
 		for (let i = 0; i < dados.length; i++) {
 			labels.push("Sensor " + dados[i].id_sensor);
-			data.push(dados[i].ocupacao);
+			data.push(dados[i].ocupado);
 		}
 
 		let grafico = new Chart(document.getElementById("grafico-barras"), {
@@ -125,7 +132,7 @@
 						maxBarThickness: 25,
 					},
 					y: {
-						//display: false,
+						display: false,
 						ticks: {
 							min: 0,
 							max: 10,
@@ -162,9 +169,9 @@
 	}
 
 	function gerarHeatmapOdor(dados) {
-		const colunas = ["Hora", "H2S", "Umidade", "NH3", "Temperatura"];
+		const colunas = ["Hora", "H<sub>2</sub>S (ppm)", "Umidade (% RH)", "NH<sub>3</sub> (ppm)", "Temperatura (°C)"];
 
-		let html = [`<table class="table table-bordered table-sm w-50 mx-auto" style="height: auto; line-height: 1.2;"><thead><tr>`];
+		let html = [`<table class="table table-bordered table-sm mx-auto" style="height: auto; line-height: 1.2; width: 75%;"><thead><tr>`];
 		for (let i = 0; i < colunas.length; i++) {
 			html.push(`<th>${colunas[i]}</th>`);
 		}
@@ -256,6 +263,9 @@
 
 				gerarGrafico(obj.presencas);
 				gerarHeatmapOdor(obj.odor);
+
+				const ultimaAtualizacao = document.getElementById("ultimaAtualizacao");
+				ultimaAtualizacao.textContent = new Date().toLocaleString();
 
 			} else {
 				await exibirErro(response);

@@ -7,6 +7,13 @@ html, body {
 	min-height: 100vh;
 }
 
+body {
+	background-image: url(/static/img/fundo.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+}
+
 .limitador {
 	margin: 0px auto;
 
@@ -37,6 +44,13 @@ html, body {
 .conteudo {
 	/* Para fazer o rodapé ficar sempre na parte inferior da página ;) */
 	flex: 1 1 auto;
+}
+
+.container {
+	padding-top: 15px;
+	padding-bottom: 15px;
+	min-height: 100%;
+	background-color: rgba(255, 255, 255, 0.7);
 }
 
 .rodape {
