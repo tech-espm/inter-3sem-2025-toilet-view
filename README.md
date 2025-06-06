@@ -9,9 +9,16 @@
 ### 2025-01
 
 ## Integrantes
-- [Nome](https://github.com/xxx)
+- [José Longo Neto](https://github.com/Jose-Longo-A)
+- [Pedro Maricate](https://github.com/PedroMaricate)
+- [Martim Ponzio](https://github.com/martimponzio)
+- [Pablo Dimitrof](https://github.com/PabloDimitrof)
+- [Enzo Malagoli](https://github.com/EnzoMalagoli)
+- [Eduardo Gul](https://github.com/eduardogd09)
 
 ## Descrição do Projeto
+
+O projeto propõe um sistema inteligente de monitoramento de banheiros, capaz de indicar em tempo real a disponibilidade das cabines e a necessidade de limpeza com base na detecção de odores e ocupação. Dessa forma, os usuários podem visualizar rapidamente a ocupação das cabines antes de entrar no banheiro, otimizando o tempo de espera e evitando deslocamentos desnecessários. Além disso, o monitoramento da qualidade do ar permite uma melhor gestão da limpeza, garantindo um ambiente mais confortável e higiênico.
 
 ## Configuração do Projeto
 
