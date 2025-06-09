@@ -4,14 +4,14 @@
 
 <div class="container">
 
-	<h1 class="my-4 text-center">
+	<h1 class="my-4 text-center color-white ">
 		Monitoramento em Tempo Real
 	</h1>
 
 	<div class="text-center my-2">
 		<div class="mb-2">
-			<b>Última atualização:</b>
-			<span id="ultimaAtualizacao">-</span>
+			<b class="color-white">Última atualização:</b>
+			<span id="ultimaAtualizacao" class="color-white">-</span>
 		</div>
 	</div>
 
@@ -70,103 +70,92 @@
     }
 
     function coresHeatmap(perc) {
-        const r0 = 0xff;
-        const g0 = 0xff;
-        const b0 = 0xff;
-        const r1 = 0xff;
-        const g1 = 0xcc;
-        const b1 = 0x00;
-        let r = Math.max(0, Math.min(255, ((perc * r1) + ((1 - perc) * r0)) | 0)).toString(16);
-        let g = Math.max(0, Math.min(255, ((perc * g1) + ((1 - perc) * g0)) | 0)).toString(16);
-        let b = Math.max(0, Math.min(255, ((perc * b1) + ((1 - perc) * b0)) | 0)).toString(16);
-        if (r.length < 2) r = "0" + r;
-        if (g.length < 2) g = "0" + g;
-        if (b.length < 2) b = "0" + b;
-        const corFundo = "#" + r + g + b;
-        const corTexto = textColorForBackground(corFundo);
-        return `background-color: ${corFundo}; color: ${corTexto};`;
-    }
+    // perc vai de 0 (menor valor) a 1 (maior valor)
+    // Azul claro: #e3f0ff (227,240,255)
+    // Azul escuro: #2563eb (37,99,235)
+    const r0 = 227, g0 = 240, b0 = 255; // azul claro
+    const r1 = 37,  g1 = 99,  b1 = 235; // azul escuro
+
+    let r = Math.round((1 - perc) * r0 + perc * r1);
+    let g = Math.round((1 - perc) * g0 + perc * g1);
+    let b = Math.round((1 - perc) * b0 + perc * b1);
+
+    const corFundo = `rgb(${r},${g},${b})`;
+    const corTexto = textColorForBackground(
+        "#" + r.toString(16).padStart(2, "0") +
+              g.toString(16).padStart(2, "0") +
+              b.toString(16).padStart(2, "0")
+    );
+    return `background-color: ${corFundo}; color: ${corTexto};`;
+}
 
 	function gerarGrafico(dados) {
-		let div = document.getElementById("div-grafico");
-		div.innerHTML = '<canvas id="grafico-barras" style="height: 20vh;"></canvas>';
+    let div = document.getElementById("div-grafico");
+    let largura = Math.max(350, dados.length * 100);
+    div.innerHTML = `<canvas id="canvas-presenca" width="${largura}" height="140"></canvas>`;
 
-		let labels = [], data = [];
+    let canvas = document.getElementById("canvas-presenca");
+    let ctx = canvas.getContext("2d");
 
-		for (let i = 0; i < dados.length; i++) {
-			labels.push("Sensor " + dados[i].id_sensor);
-			data.push(dados[i].ocupado);
-		}
+    for (let i = 0; i < dados.length; i++) {
+        let x = 60 + i * 100;
+        let y = 50;
+        let cor = dados[i].ocupado ? "#2563eb" : "#b0b0b0";
 
-		let grafico = new Chart(document.getElementById("grafico-barras"), {
-			type: "bar",
-			data: {
-				labels: labels,
-				datasets: [{
-					label: "Ocupação",
-					backgroundColor: "#4e73df",
-					hoverBackgroundColor: "#2e59d9",
-					borderColor: "#4e73df",
-					data: data,
-				}],
-			},
-			options: {
-				maintainAspectRatio: false,
-				layout: {
-					padding: {
-						left: 10,
-						right: 25,
-						top: 25,
-						bottom: 0
-					}
-				},
-				scales: {
-					x: {
-						gridLines: {
-							display: false,
-							drawBorder: false
-						},
-						ticks: {
-							maxTicksLimit: 10
-						},
-						maxBarThickness: 25,
-					},
-					y: {
-						display: false,
-						ticks: {
-							min: 0,
-							max: 10,
-							maxTicksLimit: 10,
-							padding: 10
-						},
-						gridLines: {
-							color: "rgb(234, 236, 244)",
-							zeroLineColor: "rgb(234, 236, 244)",
-							drawBorder: false,
-							borderDash: [2],
-							zeroLineBorderDash: [2]
-						}
-					},
-				},
-				legend: {
-					display: false
-				},
-				tooltips: {
-					titleMarginBottom: 10,
-					titleFontColor: '#6e707e',
-					titleFontSize: 14,
-					backgroundColor: "rgb(255,255,255)",
-					bodyFontColor: "#858796",
-					borderColor: '#dddfeb',
-					borderWidth: 1,
-					xPadding: 15,
-					yPadding: 15,
-					displayColors: false,
-					caretPadding: 10
-				},
-			}
-		});
-	}
+        // Cabeça (círculo)
+        ctx.beginPath();
+        ctx.arc(x, y - 18, 15, 0, 2 * Math.PI);
+        ctx.fillStyle = cor;
+        ctx.fill();
+
+        // Corpo (retângulo)
+        ctx.beginPath();
+        ctx.fillRect(x - 7, y - 3, 14, 32);
+
+        // Braço esquerdo
+        ctx.beginPath();
+        ctx.moveTo(x - 7, y + 2);
+        ctx.lineTo(x - 22, y + 28);
+        ctx.lineWidth = 8;
+        ctx.strokeStyle = cor;
+        ctx.lineCap = "round";
+        ctx.stroke();
+
+        // Braço direito
+        ctx.beginPath();
+        ctx.moveTo(x + 7, y + 2);
+        ctx.lineTo(x + 22, y + 28);
+        ctx.lineWidth = 8;
+        ctx.strokeStyle = cor;
+        ctx.lineCap = "round";
+        ctx.stroke();
+
+        // Perna esquerda
+        ctx.beginPath();
+        ctx.moveTo(x - 3, y + 29);
+        ctx.lineTo(x - 13, y + 54);
+        ctx.lineWidth = 8;
+        ctx.strokeStyle = cor;
+        ctx.lineCap = "round";
+        ctx.stroke();
+
+        // Perna direita
+        ctx.beginPath();
+        ctx.moveTo(x + 3, y + 29);
+        ctx.lineTo(x + 13, y + 54);
+        ctx.lineWidth = 8;
+        ctx.strokeStyle = cor;
+        ctx.lineCap = "round";
+        ctx.stroke();
+
+        // Nome do sensor
+        ctx.font = "16px Arial";
+        ctx.fillStyle = "#242424";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "top";
+        ctx.fillText("Sensor " + dados[i].id_sensor, x, y + 60);
+    }
+}
 
 	function gerarHeatmapOdor(dados) {
 		const colunas = ["Hora", "H<sub>2</sub>S (ppm)", "Umidade (% RH)", "NH<sub>3</sub> (ppm)", "Temperatura (°C)"];
