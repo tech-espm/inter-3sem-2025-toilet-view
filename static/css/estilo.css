@@ -109,7 +109,6 @@ body {
   background-color: #F5EFE8;
   color: black;
   padding: 80px 0;
-  background-color: #F5EFE8;
   background-image: url('/static/img/damasco.svg');
 }
 
@@ -151,8 +150,67 @@ body {
   margin-bottom: 30px;
 }
 
-/* Seção 2 - index - Sobre o Projeto */
-.secao2-sobre-projeto {
+/* Seção 2 - index - pq usar */
+.secao2-pq-usar {
+  background-color: #242424;
+  color: white;
+  padding: 80px 0;
+  text-align: center;
+  background-image: url('/static/img/damasco.svg');
+}	
+
+.titulo-central-secao2 {
+  text-align: center;
+  font-size: 2.3rem;
+  
+  margin-bottom: 3rem;
+  letter-spacing: 1px;
+}
+
+.cards-motivos {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  color: #242424;
+}
+
+.card-motivo {
+  background: #F5EFE8;
+  border-radius: 18px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  padding: 2.5rem 1.5rem 2rem 1.5rem;
+  min-width: 260px;
+  max-width: 320px;
+  min-height: 340px; /* aumenta a altura */
+  flex: 1 1 260px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #242424;
+}
+
+.icone-motivo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.2rem;
+}
+
+.material-icons {
+  font-size: 3rem;
+  color: #242424;
+  background: #f5efe8;
+  border-radius: 50%;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+
+/* Seção 3 - index - Sobre o Projeto */
+.secao3-sobre-projeto {
   background-color: #F5EFE8;
   color: black;
   padding: 80px 0;
@@ -160,7 +218,7 @@ body {
   background-image: url('/static/img/damasco.svg');
 }
 
-.secao2-sobre-projeto .container {
+.secao3-sobre-projeto .container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -211,8 +269,8 @@ body {
   margin-bottom: 1rem;
 }
 
-/* secão 3 - sensores - index*/
-.secao3-sensores {
+/* secão 4 - sensores - index*/
+.secao4-sensores {
   background-color: #242424;
   padding: 80px 0;
   text-align: center;
