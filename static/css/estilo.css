@@ -28,6 +28,16 @@ body {
   background-color: #242424;
 }
 
+.logo-navbar {
+  max-width: 50px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.a-logo-navbar {
+  padding: 0;
+}
+
 .navbar a,
 .navbar .nav-link,
 .navbar .navbar-brand {
@@ -94,11 +104,6 @@ body {
 	color:black;
 }
 
-.txt-desc{	
-	max-width: 350px;
-	color: black;
-}
-
 /* Seção 1 - index - o que é o toilet view */
 .secao1-oqe {
   background-color: #F5EFE8;
@@ -146,13 +151,6 @@ body {
   margin-bottom: 30px;
 }
 
-.coluna-texto-projeto p {
-  font-size: 1.05rem;
-  line-height: 1.6;
-  text-align: center;
-  margin-bottom: 1rem;
-}
-
 /* Seção 2 - index - Sobre o Projeto */
 .secao2-sobre-projeto {
   background-color: #F5EFE8;
@@ -188,6 +186,12 @@ body {
   color: black;
   max-width: 350px;
   margin: 0 auto;
+}
+
+.texto-secao {
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .coluna-texto-projeto {
@@ -389,18 +393,31 @@ body {
 .coluna-texto-sobre {
   padding: 1rem;
   color: white;
+  align-self: start;
+}
+
+.coluna-texto-nos {
+  padding: 1rem;
+  color: black;
+  align-self: start;
+}
+
+
+.titulo-secao{
+  text-align: center;
+  margin-bottom: 70px;
 }
 
 
 /* --- Seção 3 - Nossa Equipe --- */
 .secao3-nossa-equipe {
   background-color: #F5EFE8;
-  padding: 100px 0px;
+  padding: 60px 0px 100px 0px;
   text-align: center;
   background-image: url('/static/img/damasco.svg');
 }
 
-.secao3-nossa-equipe h2 {
+.secao3-nossa-equipe h1 {
   margin-bottom: 2rem;
 }
 
@@ -408,8 +425,10 @@ body {
 .grid-equipe {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
+  row-gap: 2rem;
   justify-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 /* Cartão de cada pessoa */
@@ -420,7 +439,7 @@ body {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   text-align: center;
   transition: transform 0.2s;
-  max-width: 200px;
+  max-width: 250px;
   width: 100%;
   color: white;
 }
@@ -449,7 +468,7 @@ body {
 /* Ícones de redes sociais */
 .icones-sociais a {
   color: #333;
-  margin: 0 0.4rem;
+  margin: 0 20px;
   font-size: 1.4rem;
   transition: color 0.2s;
   display: inline-block;
