@@ -19,6 +19,14 @@ def monitorar():
 def sobre():
     return render_template('index/sobre.html', titulo='Sobre Nós')
 
+@app.get('/login')
+def login():
+    return render_template('index/login.html', titulo='Login')
+
+@app.get('/cadastro')
+def cadastro():
+    return render_template('index/cadastro.html', titulo='Cadastro')
+
 @app.get('/obterDados')
 def obterDados():
     # Obter o maior id do banco

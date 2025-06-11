@@ -1,0 +1,49 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<body class="body-login">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4">
+
+                <h1 class="titulo">
+                    Cadastro
+                </h1>
+
+                <div class="padding-div">
+                    <input type="text" class="input-custom" placeholder="Usuário">
+                </div>
+                
+                <div class="padding-div">
+                    <input type="text" class="input-custom" placeholder="Nome Completo">
+                </div>
+
+                <div class="padding-div">
+                    <input type="date" class="input-custom" placeholder="Data de Nascimento">
+                </div>
+
+                <div class="padding-div">
+                    <input type="email" class="input-custom" placeholder="Email">
+                </div>
+
+                <div class="padding-div">
+                    <input type="text" class="input-custom" placeholder="Senha">
+                </div>
+
+                <div class="padding-div">
+                    <a href="/login" class="botao-cadastro-login d-block">Efetuar Cadastro</a>
+                </div>
+
+                <div>
+                    <span class="formatar-texto">Já possui cadastro? <a class="formatar-p" href="/login">Faça Login</a></span>
+                </div>
+
+            </div>
+            <div class="col-sm-4"></div>
+        </div>
+    </div>
+</body>
+
+{% endblock %}

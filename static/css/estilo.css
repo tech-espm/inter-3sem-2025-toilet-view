@@ -51,6 +51,30 @@ body {
     color: grey !important;
 }
 
+.div-login{
+  color: white;
+  margin-left: auto;
+  margin-right: 20px;
+}
+
+.span-login {
+  font-size: 14px;
+	line-height: 1;
+	margin-top: 14px;
+  text-decoration: none;
+}
+
+.a-login {
+  font-weight: 600;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+}
+
+.img-login {
+  max-width: 40px;
+}
+
 .conteudo {
 	/* Para fazer o rodapé ficar sempre na parte inferior da página ;) */
 	flex: 1 1 auto;
@@ -551,4 +575,90 @@ body {
   max-height: 50px;
   vertical-align: middle;
   border: 0;
+}
+
+.titulo {
+	font-weight: bold;
+	padding: 15px 0px 3px 0px;
+	font-size: 30px;
+  text-align: center;
+}
+
+.margeme{
+  padding: 0px 80px 0px 0px;
+}
+
+.esqueceu{
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+.padding-div {
+	padding: 12px 0px 0px 0px;
+}
+
+.input-custom {
+	width: 100%;
+	max-width: 100%;
+	padding: 5px 10px;
+	border: 2px solid #ddd;
+	border-radius: 20px;
+	outline: none;
+	font-size: 12px;
+	color: #555;
+}
+
+.input-custom:focus {
+	border-color: #ccc;
+}
+
+.input-custom::placeholder {
+	color: #999;
+}
+
+.direita {
+	text-align: right;
+}
+
+.botao-cadastro-login {
+	color: white;
+	background-color: #242424;
+	border: 2px solid;
+	padding: 5px 10px;
+	border-radius: 20px;
+	max-width: 100%;
+	font-size: 15px;
+	text-decoration: none;
+	outline: none;
+	font-weight: bold;
+	margin: 10px auto 0px auto;
+  text-align: center;
+}
+
+.botao-cadastro-login:hover {
+  background-color: white;
+  color: #242424;
+  text-decoration: none;
+}
+
+.formatar-p {
+	font-size: 10px;
+	color: gray;
+	font-weight: bold;
+}
+
+.formatar-p:hover {
+  color: gray;
+  text-decoration: underline;
+}
+
+.formatar-texto {
+	font-size: 10px;
+	color: gray;
+	font-weight: 500;
+}
+
+.body-login {
+  background-color: white;
+  background-image: none;
 }
