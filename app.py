@@ -27,6 +27,10 @@ def login():
 def cadastro():
     return render_template('index/cadastro.html', titulo='Cadastro')
 
+@app.get('/dashboard')
+def dashboard():
+    return render_template('index/dashboard.html', titulo='Dashboard')
+
 @app.get('/obterDados')
 def obterDados():
     # Obter o maior id do banco
@@ -66,10 +70,12 @@ def monitorarTempoReal():
 
     presencas = banco.monitorarPresencasTempoReal()
     odor = banco.monitorarOdorTempoReal(datetime.today().strftime('%Y-%m-%d'))
+    usos_hoje = banco.usosHoje()
 
     return json.jsonify({
         'presencas': presencas,
         'odor': odor,
+        'usosHoje': usos_hoje
 	})
 
 @app.post('/criar')

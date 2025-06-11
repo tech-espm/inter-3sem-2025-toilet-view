@@ -1,0 +1,126 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div class="container">
+
+  <h1 class="my-4 text-center text-white" style="font-weight: 900;">Painel de Monitoramento Inteligente</h1>
+
+  <div class="row justify-content-center mb-4 gap-5">
+    <div class="col-md-4 col-12 d-flex justify-content-center mb-3 mb-md-0">
+      <div class="card-motivo h-100" style="background: #fff; min-height:100px; height:120px; padding: 1.2rem 1.5rem; max-width: 400px; width: 100%;">
+        <div class="titulo-central-secao2" style="color: #2563eb; font-size: 1.3rem; margin-bottom: 1rem;">Maior valor hoje</div>
+        <div class="row">
+          <div class="col-6 d-flex flex-column align-items-center">
+            <span style="font-size: 1.1rem;">H₂S</span>
+            <span id="h2s-max" style="font-size: 2.2rem; font-weight: bold;">-</span>
+            <span>ppm</span>
+          </div>
+          <div class="col-6 d-flex flex-column align-items-center">
+            <span style="font-size: 1.1rem;">NH₃</span>
+            <span id="nh3-max" style="font-size: 2.2rem; font-weight: bold;">-</span>
+            <span>ppm</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 col-12 d-flex justify-content-center mb-3 mb-md-0">
+      <div class="card-motivo h-100" style="background: #fff; min-height:100px; height:120px; padding: 1.2rem 1.5rem; max-width: 400px; width: 100%;">
+        <div class="titulo-central-secao2" style="color: #2563eb; font-size: 1.3rem; margin-bottom: 1rem;">Menor valor hoje</div>
+        <div class="row">
+          <div class="col-6 d-flex flex-column align-items-center">
+            <span style="font-size: 1.1rem;">H₂S</span>
+            <span id="h2s-min" style="font-size: 2.2rem; font-weight: bold;">-</span>
+            <span>ppm</span>
+          </div>
+          <div class="col-6 d-flex flex-column align-items-center">
+            <span style="font-size: 1.1rem;">NH₃</span>
+            <span id="nh3-min" style="font-size: 2.2rem; font-weight: bold;">-</span>
+            <span>ppm</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 col-12 d-flex justify-content-center mb-3 mb-md-0">
+      <div class="card-motivo h-100" style="background: #fff; min-height:100px; height:120px; padding: 1.2rem 1.5rem; max-width: 400px; width: 100%;">
+        <div class="titulo-central-secao2" style="color: #2563eb; font-size: 1.3rem; margin-bottom: 1rem;">LEGENDA</div>
+        <div style="font-size: 1rem;">
+          H₂S: Sulfeto de Hidrogênio<br>
+          NH₃: Amônia<br>
+          ppm: parte por milhão
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card shadow my-4" style="border-radius: 18px;">
+    <div class="card-body">
+      <h2 class="titulo-central-secao2" style="color: #2563eb; margin-bottom: 1.5rem;">GRÁFICO DE USO HOJE</h2>
+      <div id="div-grafico-uso"></div>
+    </div>
+  </div>
+
+</div>
+
+<script src="/static/js/chart.js/chart.min.js"></script>
+<script>
+async function atualizarDashboard() {
+  try {
+    let response = await fetch("/monitorarTempoReal");
+    if (!response.ok) throw new Error("Erro ao buscar dados do dashboard");
+    let obj = await response.json();
+
+    // Atualiza cards de maior/menor valor
+    let maiorH2S = obj.odor[0].h2s, menorH2S = obj.odor[0].h2s;
+    let maiorNH3 = obj.odor[0].nh3, menorNH3 = obj.odor[0].nh3;
+    for (let i = 1; i < obj.odor.length; i++) {
+      if (obj.odor[i].h2s > maiorH2S) maiorH2S = obj.odor[i].h2s;
+      if (obj.odor[i].h2s < menorH2S) menorH2S = obj.odor[i].h2s;
+      if (obj.odor[i].nh3 > maiorNH3) maiorNH3 = obj.odor[i].nh3;
+      if (obj.odor[i].nh3 < menorNH3) menorNH3 = obj.odor[i].nh3;
+    }
+    document.getElementById("h2s-max").textContent = maiorH2S;
+    document.getElementById("h2s-min").textContent = menorH2S;
+    document.getElementById("nh3-max").textContent = maiorNH3;
+    document.getElementById("nh3-min").textContent = menorNH3;
+
+    // Gráfico de barras vertical
+    let div = document.getElementById("div-grafico-uso");
+    div.innerHTML = `<canvas id="canvas-uso-hoje" height="120"></canvas>`;
+    let labels = obj.usosHoje.map(d => "Sensor " + d.id_sensor);
+    let usos = obj.usosHoje.map(d => d.usos);
+
+    new Chart(document.getElementById("canvas-uso-hoje"), {
+      type: "bar",
+      data: {
+        labels: labels,
+        datasets: [{
+          label: "Usos hoje",
+          data: usos,
+          backgroundColor: "#2563eb",
+          borderRadius: 12,
+          barThickness: 32
+        }]
+      },
+      options: {
+        plugins: {
+          legend: { display: false }
+        },
+        scales: {
+          x: { title: { display: true, text: "Sensor" }, beginAtZero: true },
+          y: { 
+            title: { display: true, text: "Quantidade de ativações" },
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+  } catch (ex) {
+    alert("Erro ao atualizar dashboard: " + ex.message);
+  } finally {
+    setTimeout(atualizarDashboard, 10000);
+  }
+}
+atualizarDashboard();
+</script>
+{% endblock %}

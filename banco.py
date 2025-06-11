@@ -153,3 +153,14 @@ group by hora
 				"temperatura": registro.temperatura,
 			})
 		return odor
+
+def usosHoje():
+    with Session(create_engine(conexao_banco)) as sessao:
+        registros = sessao.execute(text("""
+            SELECT id_sensor, COUNT(*) as usos
+            FROM presenca
+            WHERE DATE(data) = CURDATE() AND ocupado = 1
+            GROUP BY id_sensor
+            ORDER BY id_sensor
+        """))
+        return [{"id_sensor": r.id_sensor, "usos": r.usos} for r in registros]

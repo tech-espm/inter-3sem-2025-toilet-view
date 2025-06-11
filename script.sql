@@ -72,3 +72,16 @@ where data between '2025-03-10 00:00:00' and '2025-03-14 23:59:59' and ocupado =
 group by id_sensor, dia
 order by id_sensor, dia
 ;
+
+SELECT
+    id_sensor,
+    COUNT(*) AS usos
+FROM
+    presenca
+WHERE
+    DATE(data) = CURDATE()
+    AND ocupado = 1
+GROUP BY
+    id_sensor
+ORDER BY
+    id_sensor;
